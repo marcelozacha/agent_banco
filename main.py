@@ -5,7 +5,7 @@ from graph import grafo
 from database import alternar_usuario, obter_usuario_logado, salvar_banco
 from langchain_core.messages import HumanMessage
 
-#para logar prompts, chains, tool calls e parâmetros
+#para logar prompts, chains, tool calls e parâmetros 
 from logger import registrar_observabilidade_llm
 
 # 

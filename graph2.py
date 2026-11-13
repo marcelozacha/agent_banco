@@ -39,12 +39,13 @@ from database import obter_usuario_logado
 from logger import registrar_observabilidade_llm
 
 # 1. Schema Pydantic para forçar o LLM a classificar estritamente em uma das categorias
+# No prompt_roteador do graph2.py, adicione:
 class ClassificacaoIntencao(BaseModel):
-    intencao: Literal["SALDO", "SAQUE", "DEPOSITO", "TRANSFERENCIA", "CONVERSA_GERAL"] = Field(
+    intencao: Literal["SALDO", "EXTRATO", "SAQUE", "DEPOSITO", "TRANSFERENCIA", "CONVERSA_GERAL"] = Field(
         description="A intenção identificada na fala do usuário."
     )
     justificativa: str = Field(
-        description="Breve motivo técnico da classificação."
+          description="Breve motivo técnico da classificação."
     )
 
 # 2. Definir o Estado estendido (incluindo o campo de intenção classificada)
@@ -91,7 +92,7 @@ def classificador_intencao(state: EstadoAgenteRoteado):
 # --- FUNÇÃO DE ROTEAMENTO CONDICIONAL ---
 def rotear_por_intencao(state: EstadoAgenteRoteado) -> Literal["agente_transacional", "agente_conversacional"]:
     intencao = state.get("intencao_atual", "CONVERSA_GERAL")
-    if intencao in ["SALDO", "SAQUE", "DEPOSITO", "TRANSFERENCIA"]:
+    if intencao in ["SALDO", "EXTRATO", "SAQUE", "DEPOSITO", "TRANSFERENCIA"]:
         return "agente_transacional"
     return "agente_conversacional"
 
