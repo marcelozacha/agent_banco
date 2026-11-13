@@ -19,6 +19,10 @@ class EstadoAgente(TypedDict):
     messages: list[BaseMessage]
 
 # 2. Inicializar o modelo Ollama local (ex: gemma2 ou gemma4)
+# Tool Calling Nativo / Roteamento Implícito
+# Nos LLMs modernos integrados com LangChain/LangGraph (via .bind_tools(ALL_TOOLS)), 
+# o modelo faz a classificação de intenção e o roteamento de forma nativa e automática dentro do nó 
+# assistente
 llm = ChatOllama(model="gemma4:e4b", temperature=0).bind_tools(ALL_TOOLS)
 
 # 3. Nó do Assistente (Classificador e Gerador de Resposta)
@@ -68,8 +72,8 @@ def salvar_mermaid_local(graph_compiled, filename="grafo_arquitetura.mmd"):
 # 6. Construir o Grafo
 workflow = StateGraph(EstadoAgente)
 
-workflow.add_node("assistente", chamar_modelo)
-workflow.add_node("tools", ToolNode(ALL_TOOLS))
+workflow.add_node("assistente", chamar_modelo) # Nó do assistente que chama o modelo LLM e já classifica a intenção e roteia para tools se necessário
+workflow.add_node("tools", ToolNode(ALL_TOOLS))  
 
 workflow.add_edge(START, "assistente")
 workflow.add_conditional_edges("assistente", deve_continuar, {"tools": "tools", END: END})
