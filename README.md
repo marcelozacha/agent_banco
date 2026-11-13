@@ -62,6 +62,30 @@ graph TD
 
 ---
 
+## Como executar o projeto
+
+Este projeto utiliza o [uv](https://github.com/astral-sh/uv) para gerenciamento de dependências e ambiente virtual.
+
+### Pré-requisitos
+Certifique-se de ter o `uv` instalado em sua máquina. Caso não tenha, instale com:
+- **Linux/macOS:** `curl -sSf https://astral.sh/uv/install.sh | sh`
+- **Windows:** `powershell -c "irm https://astral.sh/uv/install.sh | iex"`
+
+### Passo a passo
+
+1. **Clone o repositório:**
+   ```bash
+   git clone [https://github.com/marcelozacha/agent_banco.git](https://github.com/marcelozacha/agent_banco.git)
+   cd seu-repositorio
+	```
+	
+# Se clonar use:
+```bash
+uv sync
+```
+
+---
+
 ## ⚙️ Instalação e Execução
 
 O projeto padroniza o uso da ferramenta **`uv`** para gerenciamento ultrarrápido de pacotes, compilação determinística e isolamento de ambientes virtuais Python.
