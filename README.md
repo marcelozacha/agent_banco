@@ -75,10 +75,10 @@ Certifique-se de ter o `uv` instalado em sua máquina. Caso não tenha, instale 
 
 1. **Clone o repositório:**
    ```bash
-   git clone [https://github.com/marcelozacha/agent_banco.git](https://github.com/marcelozacha/agent_banco.git)
-   cd seu-repositorio
+   git clone https://github.com/marcelozacha/agent_banco.git
+   cd seu_diretorio
 	```
-	
+
 # Se clonar use:
 ```bash
 uv sync
