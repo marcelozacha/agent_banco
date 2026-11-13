@@ -180,3 +180,4 @@ Durante a execução no terminal, utilize os seguintes comandos para controlar a
 - Pode ser usado um framework orquestrador como NeMO guardrails
 - Pode ser usado modelo de guardrails locais especializados como llama guard, IBM granite guardian ou ShieldGemma, uma vantagem é terem saída simples yes/no, safe/unsafe
 - Combinar técnicas de guardrail
+- Separar um arquivo de prompts, que facilitaria o versionamento.
