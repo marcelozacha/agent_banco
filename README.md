@@ -32,7 +32,29 @@ O sistema opera sob três pilares de engenharia de agentes autônomos:
 
 ### Diagrama de Arquitetura
 
-![Diagrama Arquitetura](image.png)
+```mermaid
+---
+config:
+  flowchart:
+    curve: linear
+---
+graph TD;
+	__start__([<p>__start__</p>]):::first
+	assistente(assistente)
+	tools(tools<hr/><small><em>__interrupt = before
+__tools = consultar_saldo, realizar_saque, realizar_deposito, transferir_valor</em></small>)
+	__end__([<p>__end__</p>]):::last
+	__start__ --> assistente;
+	assistente -.-> __end__;
+	assistente -.-> tools;
+	tools --> assistente;
+	classDef default fill:#F3E8FF,stroke:#C084FC, color:#1E1B4B,line-height:1.2
+	classDef first fill:#bfb6fc
+	classDef last fill:#bfb6fc
+```
+
+<hr>
+
 
 ```mermaid
 graph TD
@@ -53,6 +75,7 @@ graph TD
 | :--- | :--- |
 | **`main.py`** | Ponto de entrada do sistema; integra o grafo de estados do agente à interface de linha de comando (CLI), gerenciando sessões, entradas do usuário e observabilidade. |
 | **`graph.py`** | Define o grafo de estados do agente bancário, integrando o modelo LLM (Ollama), as ferramentas (*tools*), a lógica de fluxo e o ponto de interrupção HITL. |
+| **`graph2.py`** | Abordagem com Nó Explícito de Classificação (Router / Classifier Pattern). Define o grafo de estados do agente bancário, integrando o modelo LLM (Ollama), as ferramentas (*tools*), a lógica de fluxo e o ponto de interrupção HITL. |
 | **`tools.py`** | Define as ferramentas executáveis pelo agente para interagir com o banco de dados (consultas de saldo, saques, depósitos e transferências). |
 | **`database.py`** | Gerencia a persistência dos dados do banco em um arquivo JSON, controlando contas de usuários e saldos. |
 | **`guardrails.py`** | Implementa o sistema de restrições de segurança (*guardrails*), filtrando linguagem imprópria, tentativas de *jailbreak* e comportamentos indesejados. |
@@ -66,10 +89,26 @@ graph TD
 
 Este projeto utiliza o [uv](https://github.com/astral-sh/uv) para gerenciamento de dependências e ambiente virtual.
 
-### Pré-requisitos
-Certifique-se de ter o `uv` instalado em sua máquina. Caso não tenha, instale com:
-- **Linux/macOS:** `curl -sSf https://astral.sh/uv/install.sh | sh`
-- **Windows:** `powershell -c "irm https://astral.sh/uv/install.sh | iex"`
+### Pré-requisitos para rodar localmente
+
+Certifique-se de ter as seguintes ferramentas e modelos instalados em sua máquina antes de prosseguir:
+
+1. **Gerenciador de Pacotes `uv`**:
+   - **Linux/macOS:** `curl -sSf https://astral.sh/uv/install.sh | sh`
+   - **Windows:** `powershell -c "irm https://astral.sh/uv/install.sh | iex"`
+
+2. **Ollama (Execução de Modelos Locais)**:
+   - Baixe e instale o [Ollama](https://ollama.com/) de acordo com o seu sistema operacional.
+   - Certifique-se de que o serviço do Ollama esteja rodando em segundo plano.
+
+3. **Modelo Gemma 4b**:
+   - Baixe o modelo configurado no projeto executando o comando abaixo no seu terminal:
+     ```bash
+     ollama run gemma4:e4b
+     ```
+     *(Nota: Substitua `gemma4:e4b` pela tag exata do modelo Gemma que estiver utilizando no arquivo de configuração do agente). você pode usar llama3.1:latest, gemma2 ou outro
+     *(Nota2: Você vai precisar de pelos menos uma placa de vídeo rtx com 8gb vram e 32gb ram*
+     *(Nota3: Você  modificar e usar interface openAI, Gemini, groq e conectar a modelos de fronteira, vai precisar de chave de API e configurar o .env, a versão atual não tem fallback então precisa implementar*
 
 ### Passo a passo
 
@@ -90,7 +129,7 @@ uv sync
 
 O projeto padroniza o uso da ferramenta **`uv`** para gerenciamento ultrarrápido de pacotes, compilação determinística e isolamento de ambientes virtuais Python.
 
-### 1. Inicializar o Projeto e Ambiente Virtual
+### 1. Inicializar o Projeto do zero e Ambiente Virtual
 ```bash
 # 1. Criar o diretório do projeto e entrar nele
 uv init agent_banco
