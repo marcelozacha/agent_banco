@@ -1,7 +1,7 @@
 [project]
 name = "agent-banco"
 version = "0.1.0"
-description = "Add your description here"
+description = "Agente Bancário com LLM, ReAct, HITL e Ollama"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = []
