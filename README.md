@@ -175,3 +175,8 @@ Durante a execução no terminal, utilize os seguintes comandos para controlar a
 - Tirar o HITL de operações de consulta e deixar somente para operações que alteram dados.
 - Adicionar um RAG para tirar dúvidas sobre seguros, cartão de crédito, consórcios
 - Transformar o projeto em folders CLEAN CODE, separando namespace, e podendo separar tipos de interface como web, gradio, streamlit ou expandir para API mantend a lógica.
+- Hoje esta com guardrail deterministico e de IA combinados, mas poderia adicionar um guardrail semântico.
+- O guardrail atual é de input, pode ser adicionado um de output para evitar vazamentos como PII
+- Pode ser usado um framework orquestrador como NeMO guardrails
+- Pode ser usado modelo de guardrails locais especializados como llama guard, IBM granite guardian ou ShieldGemma, uma vantagem é terem saída simples yes/no, safe/unsafe
+- Combinar técnicas de guardrail
