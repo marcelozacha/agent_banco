@@ -30,6 +30,8 @@ def registrar_operacao_bancaria(tipo_operacao: str, usuario_nome: str, valor: fl
 
 def obter_extrato_usuario(usuario_nome: str, limite: int = 5) -> list[dict]:
     """Lê o arquivo de log e retorna as últimas operações do usuário especificado."""
+    #to-do: Implementar paginação ou filtros adicionais se necessário, como data inicial/final, tipo de operação, etc.
+    #limite: número máximo de operações a retornar (padrão 5), mas poderia ser ultima semana, ultumo mês, etc.
     if not os.path.exists(ARQUIVO_LOG_OPERACAO):
         return []
     

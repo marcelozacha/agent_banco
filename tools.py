@@ -28,7 +28,9 @@ def consultar_extrato() -> str:
     extrato_formatado = f"--- EXTRATO RECENTE: {user['nome']} ---\n"
     for op in historico:
         extrato_formatado += f"[{op['timestamp']}] {op['operacao']} - R$ {op['valor']:.2f} | Detalhes: {op['detalhes']}\n"
-        
+
+    extrato_formatado += f"Titular: {user['nome']} | Código: {user['codigo']}\n"
+    extrato_formatado += f"Agência: {user['agencia']} | Conta: {user['conta']}-{user['digito']}\n"
     extrato_formatado += f"Saldo atual em conta: R$ {user['saldo']:.2f}"
     return extrato_formatado
 

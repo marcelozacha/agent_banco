@@ -12,6 +12,8 @@ from logger import registrar_observabilidade_llm
 from guardrails import aplicar_guardrails, aplicar_guardrail_ia, aplicar_todos_guardrails # <-- importa as funções de guardrails do arquivo guardrails.py
 
 def rodar_chat():
+    '''Função principal que gerencia a interação do usuário com o agente bancário via CLI, incluindo a execução do grafo, aplicação de guardrails e registro de observabilidade.'''
+
     config = {"configurable": {"thread_id": "sessao_banco_1"}}
     
     print("=== BANCO DIGITAL IA (Ollama + LangGraph) ===")
@@ -72,6 +74,8 @@ def rodar_chat():
                     confirmacao = input("\nDeseja aprovar e executar esta operação? (s/n): ").strip().lower()
                     if confirmacao != 's':
                         print("❌ Operação cancelada pelo usuário.")
+                        #ENTRADA 3: Ao detectar CANCELAMENTO da tool call e seus parâmetros gerados pelo agente
+                        registrar_observabilidade_llm("TOOL_CALL_CANCELADA", {"tool": tc["name"], "args": tc["args"]})
                         break
                 else:
                     if latest_msg.content:
