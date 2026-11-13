@@ -165,3 +165,13 @@ Durante a execução no terminal, utilize os seguintes comandos para controlar a
 * **`/sair`** — Encerra a aplicação de forma segura.
 * **`/usuario`** — Alterna o usuário ativo na sessão bancária.
 * **HITL (`s` / `n`)** — Quando uma transação financeira for solicitada, o agente pausará a execução e aguardará sua confirmação explícita com **`s`** (aprovar) ou **`n`** (recusar).
+
+
+## 💡 Melhorias que podem ser aplicadas
+
+- Saver do agente, pode ser trocado de memorysaver para um banco de dados como sqlite, por exemplo.
+- A identificação do usuário utilizar um UUID4 concatenado.
+- Adicionar fallback e modelos online.
+- Tirar o HITL de operações de consulta e deixar somente para operações que alteram dados.
+- Adicionar um RAG para tirar dúvidas sobre seguros, cartão de crédito, consórcios
+- Transformar o projeto em folders CLEAN CODE, separando namespace, e podendo separar tipos de interface como web, gradio, streamlit ou expandir para API mantend a lógica.
